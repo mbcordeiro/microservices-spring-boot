@@ -5,10 +5,13 @@ import org.slf4j.LoggerFactory;
 import com.matheuscordeiro.hrauth.entities.User;
 import com.matheuscordeiro.hrauth.feignclients.UserFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
@@ -21,6 +24,17 @@ public class UserService {
             throw new IllegalArgumentException("Email not found");
         }
         logger.info("Email found: " + email);
+        return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userFeignClient.findByEmail(username).getBody();
+        if (user == null) {
+            logger.error("Email not found: " + username);
+            throw new UsernameNotFoundException("Email not found");
+        }
+        logger.info("Email found: " + username);
         return user;
     }
 }
