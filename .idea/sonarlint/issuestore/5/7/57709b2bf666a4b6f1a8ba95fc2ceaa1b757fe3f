@@ -1,0 +1,9 @@
+
+?
+java:S26290"$Invoke method(s) only conditionally.(ÎÆ‚—ûÿÿÿÿ
+R
+java:S2629$"7Use the built-in formatting to construct this argument.(ºÚÀ”ÿÿÿÿÿ
+R
+java:S36551"7Call "Optional#isPresent()" before accessing the value.(ÅÈÌ×ÿÿÿÿÿ
+\
+java:S3457$"AFormat specifiers should be used instead of string concatenation.(ºÚÀ”ÿÿÿÿÿ
